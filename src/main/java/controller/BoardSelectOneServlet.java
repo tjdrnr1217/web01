@@ -24,29 +24,19 @@ public class BoardSelectOneServlet extends HttpServlet {
 		BoardMapper bMapper = MyBatisContext.getSqlSession().getMapper(BoardMapper.class);
 
 		long no = Long.parseLong(request.getParameter("no"));
-		
 		// 1.mapper를 이용하여 게시글 1개 가져오기
 		Board board = bMapper.selectBoardOne(no);
-		
+		long nno = bMapper.selectNextBoardOne(no);
 		// 2. View로 전송
 		request.setAttribute("brd", board);
-		
+		request.setAttribute("nno", nno);
 		// 3. view표시
 		request.getRequestDispatcher("/WEB-INF/boardselectone1.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		BoardMapper bMapper = MyBatisContext.getSqlSession().getMapper(BoardMapper.class);
-		long no = Long.parseLong(request.getParameter("no"));
-		
-		long prev = bMapper.selectNextBoardOne(no);
-		
-		int ret = bMapper.selectNextBoardOne(no);
-		
-		if(ret > prev) {
-			response.sendRedirect("selectone.do");
 		}
 	}
 
-}
+
