@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mapper.BoardMapper;
 
-@WebServlet(urlPatterns = { "/board/selectone.do" })
+@WebServlet(urlPatterns = {"/board/selectone.do"})
 public class BoardSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,8 +37,16 @@ public class BoardSelectOneServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		BoardMapper bMapper = MyBatisContext.getSqlSession().getMapper(BoardMapper.class);
+		long no = Long.parseLong(request.getParameter("no"));
+		
+		long prev = bMapper.selectNextBoardOne(no);
+		
+		int ret = bMapper.selectNextBoardOne(no);
+		
+		if(ret > prev) {
+			response.sendRedirect("selectone.do");
+		}
 	}
 
 }

@@ -26,7 +26,15 @@
 			<input type="submit" value="삭제" />
 		</form>
 		
-		<input type="button" value="이전글" />
-		<input type="button" value="다음글" />
+		<a href="selectone.do?no="></a>
+		<form action="selectnext.do" method="post" style="display:inline-block">
+			<input type="text" name="no" value="${brd.no}"/>
+			<input type="submit" value="이전글"/>
+		</form>
+		
+		<a href="selectone.do?no={prev}">
+			<input type="submit" value="다음글"/>
+			</a>
+		</form>
 	</body>
 </html>

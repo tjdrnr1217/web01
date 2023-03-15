@@ -40,4 +40,9 @@ public interface BoardMapper {
 		" DELETE FROM board WHERE NO=#{no} "
 	})
 	public int deleteBoardOne(@Param("no") int no);
+	
+	@Select({
+		" SELECT MIN(no) FROM board WHERE No > #{no} "
+	})
+	public int selectNextBoardOne(@Param("no") long no);
 }
